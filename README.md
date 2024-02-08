@@ -8,3 +8,5 @@ Corte 1: Contiene el pdf del Comprendimiento del problema
 Corte 2: Contiene la Captura de requisitos
 
 Corte 3:
+
+Scrum:
