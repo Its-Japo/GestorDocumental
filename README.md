@@ -5,4 +5,4 @@ Avances 2: Contiene los requisitos
 
 Corte 1: Contiene el pdf del Comprendimiento del problema 
 
-Corte 2:
+Corte 2: Contiene la Captura de requisitos
