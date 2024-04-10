@@ -15,6 +15,7 @@ Contiene la Captura de requisitos
 Contiene el análisis y diseño del software
 
 ##Scrum:
+Donde se encuentra toda la info sobre el primer sprint
 
 ## Proyecto
 Contiene el cliente, la base de datos y el server
