@@ -14,7 +14,7 @@ Contiene la Captura de requisitos
 ## Corte 3: 
 Contiene el análisis y diseño del software
 
-Scrum:
+##Scrum:
 
 ## Proyecto
 Contiene el cliente, la base de datos y el server
