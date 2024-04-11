@@ -4,120 +4,108 @@ WITH
 
 GRANT ALL PRIVILEGES ON DATABASE gestor_documental TO postgres;
 
-CREATE TABLE
-    DOCUMENTO (
-        documentoId SERIAL PRIMARY KEY,
-        expedienteId INT NOT NULL,
-        nombre VARCHAR(255) NOT NULL,
-        tipoDocumento VARCHAR(255) NOT NULL,
-        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE (expedienteId)
-    );
+CREATE TABLE DOCUMENTO (
+    documentoId SERIAL PRIMARY KEY,
+    expedienteId INT NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    tipoDocumento VARCHAR(50) NOT NULL,
+    creacionFecha DATE NOT NULL,
+    modificacionFecha DATE,
+    usuarioCreador INT NOT NULL,
+    usuarioMod INT,
+    url VARCHAR(50) NOT NULL,
+    FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
+);
 
-CREATE TABLE
-    EXPEDIENTE (expedienteId INT PRIMARY KEY NOT NULL);
+CREATE TABLE EXPEDIENTE (
+    expedienteId SERIAL  PRIMARY KEY,
+    creacionFecha DATE NOT NULL,
+    modificacionFecha DATE,
+    usuarioCreador INT NOT NULL,
+    usuarioMod INT,
+    tag VARCHAR(50)
+);
 
-CREATE TABLE
-    PROYECTO (
-        proyectoId SERIAL PRIMARY KEY NOT NULL,
-        nombre VARCHAR(255) NOT NULL,
-        plantilla VARCHAR(255) NOT NULL
-    );
+CREATE TABLE VALOR (
+    correlativo SERIAL PRIMARY KEY,
+    proyectoId INT NOT NULL,
+    expedienteId INT NOT NULL,
+    creacionFecha DATE NOT NULL,
+    modificacionFecha DATE,
+    usuarioMod INT,
+    valor VARCHAR(50) NOT NULL,
+    FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
+    FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
+);
 
-CREATE TABLE
-    TIPO_DATO (
-        tipoDatoId SERIAL PRIMARY KEY NOT NULL,
-        nombre VARCHAR(255) NOT NULL
-    );
+CREATE TABLE INDICE (
+    correlativo SERIAL PRIMARY KEY,
+    proyectoId INT NOT NULL,
+    tipoDato INT NOT NULL,
+    requerido VARCHAR(50),
+    FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
+    FOREIGN KEY (tipoDato) REFERENCES TIPO_DATO(tipoDatoId) ON DELETE CASCADE
+);
 
-CREATE TABLE
-    CAMPO (
-        campoId SERIAL PRIMARY KEY NOT NULL,
-        nombre VARCHAR(255) NOT NULL
-    );
+CREATE TABLE TIPO_DATO (
+    tipoDatoId SERIAL  PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
 
-CREATE TABLE
-    VALOR (
-        correlativo INT NOT NULL,
-        proyectoId INT NOT NULL,
-        expedienteId INT NOT NULL,
-        valor VARCHAR(255) NOT NULL,
-        PRIMARY KEY (correlativo, proyectoId),
-        FOREIGN KEY (correlativo) REFERENCES INDICE (correlativo),
-        FOREIGN KEY (proyectoId) REFERENCES INDICE (proyectoId),
-        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE (expedienteId)
-    );
+CREATE TABLE PROYECTO (
+    proyectoId SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    plantilla VARCHAR(50) NOT NULL
+);
 
-CREATE TABLE
-    INDICE (
-        correlativo INT NOT NULL,
-        proyectoId INT NOT NULL,
-        nombre INT NOT NULL,
-        tipoDato INT NOT NULL,
-        requerido BOOLEAN NOT NULL,
-        PRIMARY KEY (correlativo, proyectoId),
-        FOREIGN KEY (tipoDato) REFERENCES TIPO_DATO (tipoDatoId),
-        FOREIGN KEY (nombre) REFERENCES CAMPO (campoId),
-        FOREIGN KEY (proyectoId) REFERENCES PROYECTO (proyectoId)
-    );
 
--- Tabla usuario
-CREATE TABLE
-    usuario (
-        userid SERIAL PRIMARY KEY,
-        username VARCHAR(50) UNIQUE NOT NULL,
-        passwordHash CHAR(64) NOT NULL,
-        correo VARCHAR(100)
-    );
+CREATE TABLE USUARIO (
+    userId SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    passwordHash VARCHAR(50) UNIQUE NOT NULL,
+    correo VARCHAR(50) UNIQUE NOT NULL
+);
 
--- Tabla rol
-CREATE TABLE
-    rol (
-        roleid SERIAL PRIMARY KEY,
-        nombre VARCHAR(50) UNIQUE NOT NULL,
-        descripcion TEXT
-    );
+CREATE TABLE ROL (
+    rolId SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL,
+    descripcion VARCHAR(50)
+);
 
--- Tabla de roles asigandos (muchos a muchos)
-CREATE TABLE
-    rol_asignado (
-        userid INT NOT NULL,
-        roleid INT NOT NULL,
-        PRIMARY KEY (userid, roleid),
-        FOREIGN KEY (userid) REFERENCES usuario (userid) ON DELETE CASCADE,
-        FOREIGN KEY (roleid) REFERENCES rol (roleid) ON DELETE CASCADE
-    );
+CREATE TABLE PERMISO (
+    permisoId SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL,
+    descripcion VARCHAR(50)
+);
 
--- Tabla permiso
-CREATE TABLE
-    permiso (
-        permisoid SERIAL PRIMARY KEY,
-        nombre VARCHAR(50) UNIQUE NOT NULL,
-        descripcion TEXT
-    );
+CREATE TABLE ROL_ASIGNADO (
+    userId INT NOT NULL,
+    rolId INT NOT NULL,
+    PRIMARY KEY (userId, rolId),
+    FOREIGN KEY (userId) REFERENCES USUARIO(userId) ON DELETE CASCADE,
+    FOREIGN KEY (rolId) REFERENCES ROL(rolId) ON DELETE CASCADE
+);
 
--- Tabla de los permisos asociados (muchos a muchos)
-CREATE TABLE
-    permiso_asociado (
-        permisoid INT NOT NULL,
-        roleid INT NOT NULL,
-        PRIMARY KEY (permisoid, roleid),
-        FOREIGN KEY (permisoid) REFERENCES permiso (permisoid) ON DELETE CASCADE,
-        FOREIGN KEY (roleid) REFERENCES rol (roleid) ON DELETE CASCADE
-    );
+CREATE TABLE PERMISO_ASOCIADO (
+    permisoId INT NOT NULL,
+    rolId INT NOT NULL,
+    PRIMARY KEY (permisoId, rolId),
+    FOREIGN KEY (permisoId) REFERENCES PERMISO(permisoId) ON DELETE CASCADE,
+    FOREIGN KEY (rolId) REFERENCES ROL(rolId) ON DELETE CASCADE
+);
 
--- Tabla de logs
-CREATE TABLE
-    log_sesion (idLog SERIAL PRIMARY KEY);
+CREATE TABLE LOG_SESION (
+    idLog SERIAL PRIMARY KEY,
+);
 
--- Tabla de los detalles de un log
-CREATE TABLE
-    detalle_log (
-        userid INT NOT NULL,
-        idLog INT NOT NULL,
-        fecha DATE NOT NULL,
-        hora TIME NOT NULL,
-        accion TEXT,
-        token UUID, --hay que platicar si este tipo de dato esá bien--
-        FOREIGN KEY (userid) REFERENCES usuario (userid) ON DELETE CASCADE,
-        FOREIGN KEY (idLog) REFERENCES log_sesion (idLog) ON DELETE CASCADE
-    );
+CREATE TABLE DETALLE_LOG (
+    idLog INT NOT NULL,
+    userId INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    accion VARCHAR(50),
+    token VARCHAR(50),
+    PRIMARY KEY (idLog, userId),
+    FOREIGN KEY (idLog) REFERENCES LOG_SESION(idLog) ON DELETE CASCADE,
+    FOREIGN KEY (userId) REFERENCES USUARIO(userId) ON DELETE CASCADE
+);
