@@ -12,3 +12,6 @@ COPY gestor_documental.sql /docker-entrypoint-initdb.d/
 
 # Expone el puerto 5432 para permitir la comunicación con el servidor
 EXPOSE 5432
+
+# Mantén el contenedor en ejecución después de la inicialización de PostgreSQL
+CMD ["postgres"]
