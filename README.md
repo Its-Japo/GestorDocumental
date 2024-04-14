@@ -14,7 +14,7 @@ Contiene la Captura de requisitos
 ## Corte 3: 
 Contiene el análisis y diseño del software
 
-##Scrum (Primer SPrint):
+##Scrum (Primer Sprint):
 Donde se encuentra toda la info sobre el primer sprint
 
 ## Proyecto
