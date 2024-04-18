@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'login', 
     component: LoginComponent 
   },
+  {
+    path: 'portal',
+    loadChildren: () => import('./modules/portal/portal.module').then(m => m.PortalModule),
+  }
 ];
 
 @NgModule({

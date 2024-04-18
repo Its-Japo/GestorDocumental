@@ -16,7 +16,7 @@
                     <i [class]="hide ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
                 </button>
             </div>
-            <button type="submit" [disabled]="!loginForm.valid">Iniciar sesión</button>
+            <button type="submit" [disabled]="!loginForm.valid" [routerLink]="['/portal']">Iniciar sesión</button>
         </form>
 
     </div>
