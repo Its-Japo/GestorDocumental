@@ -27,10 +27,20 @@ CREATE TABLE
         tag VARCHAR(50)
     );
 
+CREATE TABLE 
+    SEPARADOR (
+        separadorId Serial PRIMARY KEY,
+        nombre VARCHAR(50) NOT NULL,
+        padreId INT NOT NULL,
+        expedienteId INT NOT NULL,
+        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE,
+        FOREIGN KEY (padreId) REFERENCES SEPARADOR(separadorId) ON DELETE CASCADE
+    );
+
 CREATE TABLE
     DOCUMENTO (
         documentoId SERIAL PRIMARY KEY,
-        expedienteId INT NOT NULL,
+        padreId INT NOT NULL,
         nombre VARCHAR(50) NOT NULL,
         tipoDocumento VARCHAR(50) NOT NULL,
         creacionFecha DATE NOT NULL,
@@ -38,30 +48,32 @@ CREATE TABLE
         usuarioCreador INT NOT NULL,
         usuarioMod INT,
         url VARCHAR(50) NOT NULL,
-        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE (expedienteId) ON DELETE CASCADE
+        FOREIGN KEY (padreId) REFERENCES SEPARADOR(separadorId) ON DELETE CASCADE
     );
 
 CREATE TABLE
     VALOR (
-        correlativo SERIAL PRIMARY KEY,
+        correlativo INT NOT NULL,
         proyectoId INT NOT NULL,
         expedienteId INT NOT NULL,
         creacionFecha DATE NOT NULL,
         modificacionFecha DATE,
         usuarioMod INT,
         valor VARCHAR(50) NOT NULL,
-        FOREIGN KEY (proyectoId) REFERENCES PROYECTO (proyectoId) ON DELETE CASCADE,
-        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE (expedienteId) ON DELETE CASCADE
+        FOREIGN KEY (correlativo, proyectoId) REFERENCES INDICE(correlativo, proyectoId) ON DELETE CASCADE,
+        FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
+        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
     );
 
 CREATE TABLE
     INDICE (
-        correlativo SERIAL PRIMARY KEY,
+        correlativo SERIAL NOT NULL,
         proyectoId INT NOT NULL,
         tipoDato INT NOT NULL,
         requerido VARCHAR(50),
-        FOREIGN KEY (proyectoId) REFERENCES PROYECTO (proyectoId) ON DELETE CASCADE,
-        FOREIGN KEY (tipoDato) REFERENCES TIPO_DATO (tipoDatoId) ON DELETE CASCADE
+        PRIMARY KEY (correlativo, proyectoId),
+        FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
+        FOREIGN KEY (tipoDato) REFERENCES TIPO_DATO(tipoDatoId) ON DELETE CASCADE
     );
 
 CREATE TABLE
