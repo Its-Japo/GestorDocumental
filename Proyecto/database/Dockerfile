@@ -8,10 +8,10 @@ ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=root 
 
 # Copia los archivos SQL de inicialización a la carpeta de entrada del contenedor
-COPY gestor_documental.sql /docker-entrypoint-initdb.d/
+#COPY database/gestor_documental.sql /docker-entrypoint-initdb.d/
 
 # Expone el puerto 5432 para permitir la comunicación con el servidor
-EXPOSE 5432
+#EXPOSE 5432
 
 # Mantén el contenedor en ejecución después de la inicialización de PostgreSQL
 CMD ["postgres"]
