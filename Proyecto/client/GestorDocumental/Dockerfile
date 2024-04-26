@@ -1,11 +1,13 @@
 # Use the official nginx image as a base
-FROM nginx:alpine
+FROM node:alpine
 
 # Set working directory to nginx asset directory
-WORKDIR /usr/share/nginx/html
+WORKDIR /src/app
 
 # Remove default nginx static assets
-RUN rm -rf ./*
+RUN npm install -g @angular/cli
+
+#RUN npm install
 
 # Run Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["ng", "serve", "--host", "0.0.0.0"]

@@ -3,9 +3,11 @@ version: '3.8'
 services:
   client:
     build: 
-      context: ./client/GestorDocumental
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: client/GestorDocumental/Dockerfile
     container_name: angular_client
+    volumes:
+    - ./client/GestorDocumental:/src/app
     ports:
       - "3400:4200"
     depends_on:
