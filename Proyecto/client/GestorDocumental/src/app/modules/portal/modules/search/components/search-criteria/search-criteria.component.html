@@ -1,0 +1,21 @@
+<div class="master">
+  <div class="head">
+    <h1>Search Criteria</h1>
+  </div>
+  <section>
+    <div class="proyect-select">
+      <label for="proyect">Proyect</label>
+      <select id="proyect" formControlName="proyect">
+
+      </select>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <formly-form [model]="model" [fields]="fields"></formly-form>
+
+    </form>
+  </section>
+  <div class="navigation">
+    <button type="submit" [disabled]="!form.valid">Search</button>
+    <button type="button" (click)="onSave()">Save Search</button>
+  </div>
+</div>

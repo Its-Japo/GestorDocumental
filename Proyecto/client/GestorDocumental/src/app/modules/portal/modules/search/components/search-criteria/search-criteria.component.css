@@ -1,0 +1,47 @@
+.master {
+  width: 100%;
+  height: 100vh;
+}
+
+.head{
+  margin-top: 2%;
+  margin-bottom: 3%;
+}
+
+.head > h1{
+  color: #000000;
+  font-size: 32px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 750;
+  font-style: normal;
+}
+
+.proyect-select{
+  display: flex;
+  justify-content: space-between; /* Alinea los hijos en ambos extremos del contenedor */
+  align-items: center; /* Centra los hijos verticalmente */
+  background-color: #969696;
+  padding-left: 3%
+}
+
+.proyect-select > label{
+  margin-right: auto; /* Empuja todo lo demás hacia el lado opuesto */
+  color: #FFFFFF;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 750;
+  font-style: normal;
+
+}
+
+.proyect-select > select{
+  /* Alinea el select si es necesario, como un ancho máximo o específico */
+  width: 50%; /* O cualquier otro ancho */
+  margin: 0 auto; /* Centra el select en el espacio restante */
+}
+
+.custom-input-class .form-control {
+  color: aqua !important; /* Utiliza !important solo si es necesario y con precaución */
+}
+
+

@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './components/login/login.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { LoginComponent } from './components/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyBootstrapModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
