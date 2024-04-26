@@ -1,8 +1,4 @@
-ALTER USER postgres
-WITH
-    PASSWORD 'root';
-
-GRANT ALL PRIVILEGES ON DATABASE gestor_documental TO postgres;
+-- Esquema base de app
 
 CREATE TABLE
     TIPO_DATO (
@@ -52,6 +48,17 @@ CREATE TABLE
     );
 
 CREATE TABLE
+    INDICE (
+        correlativo SERIAL NOT NULL,
+        proyectoId INT NOT NULL,
+        tipoDato INT NOT NULL,
+        requerido VARCHAR(50),
+        PRIMARY KEY (correlativo, proyectoId),
+        FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
+        FOREIGN KEY (tipoDato) REFERENCES TIPO_DATO(tipoDatoId) ON DELETE CASCADE
+    );
+
+CREATE TABLE
     VALOR (
         correlativo INT NOT NULL,
         proyectoId INT NOT NULL,
@@ -63,17 +70,6 @@ CREATE TABLE
         FOREIGN KEY (correlativo, proyectoId) REFERENCES INDICE(correlativo, proyectoId) ON DELETE CASCADE,
         FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
         FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
-    );
-
-CREATE TABLE
-    INDICE (
-        correlativo SERIAL NOT NULL,
-        proyectoId INT NOT NULL,
-        tipoDato INT NOT NULL,
-        requerido VARCHAR(50),
-        PRIMARY KEY (correlativo, proyectoId),
-        FOREIGN KEY (proyectoId) REFERENCES PROYECTO(proyectoId) ON DELETE CASCADE,
-        FOREIGN KEY (tipoDato) REFERENCES TIPO_DATO(tipoDatoId) ON DELETE CASCADE
     );
 
 CREATE TABLE
