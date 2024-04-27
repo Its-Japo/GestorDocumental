@@ -2,19 +2,24 @@
 
 // region:    --- Modules
 
+mod config;
 mod ctx;
 mod error;
 mod log;
 mod model;
 mod web;
+// #[cfg(test)]
+pub mod _dev_utils;
 
 pub use self::error::{Error, Result};
+pub use config::config; // use crate::config
 
 use crate::model::ModelManager;
 use crate::web::mw_auth::mw_ctx_resolve;
 use crate::web::mw_res_map::mw_reponse_map;
 use crate::web::{routes_login, routes_static};
 use axum::{middleware, Router};
+use tracing::info;
 use tracing_subscriber::EnvFilter;
 use std::net::SocketAddr;
 use tower_cookies::CookieManagerLayer;
@@ -44,8 +49,8 @@ async fn main() -> Result<()> {
 		.fallback_service(routes_static::serve_dir());
 
 	// region:    --- Start Server
-	let addr = SocketAddr::from(([0, 0, 0, 0], 8000));
-	println!("->> {:<12} - {addr}\n", "LISTENING");
+	let addr: SocketAddr = SocketAddr::from(([0, 0, 0, 0], 8000));
+	info!("{:<12} - {addr}\n", "LISTENING");
 	axum::Server::bind(&addr)
 		.serve(routes_all.into_make_service())
 		.await
