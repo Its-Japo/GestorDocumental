@@ -17,5 +17,7 @@ Contiene el análisis y diseño del software
 ##Scrum (Primer Sprint):
 Donde se encuentra toda la info sobre el primer sprint
 
+##Segundo Sprint
+
 ## Proyecto
 Contiene el cliente, la base de datos y el server
