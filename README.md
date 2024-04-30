@@ -18,7 +18,7 @@ Contiene el análisis y diseño del software
 Donde se encuentra toda la info sobre el primer sprint
 
 ## Segundo Sprint
-onde se encuentra toda la info sobre el segundo sprint
+Donde se encuentra toda la info sobre el segundo sprint
 
 ## Proyecto
 Contiene el cliente, la base de datos y el server
