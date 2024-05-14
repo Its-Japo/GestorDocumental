@@ -1,46 +1,43 @@
-<div class="master">
-  <div class="head">
+<div class="container">
+  <header>
     <h1>Search Criteria</h1>
-  </div>
-  <section>
-    <div class="proyect-select">
-      <label for="proyect">Proyect</label>
-      <select id="proyect" formControlName="proyect">
-
-      </select>
+  </header>
+  <main>
+    <div class="project-select">
+      <label for="project">Project</label>
+      <select id="project" formControlName="project"></select>
     </div>
 
     <form class="form-class" method="post">
-      <div class="attributeForm">
-        <label for="idLiquidacion">Id Liquidación:</label><br>
-        <input type="text" id="idLiquidacion" name="idLiquidacion"><br>
+      <div class="form-group">
+        <label for="idLiquidacion">Id Liquidación:</label>
+        <input type="text" id="idLiquidacion" name="idLiquidacion">
       </div>
 
-      <div class="attributeForm">
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre"><br>
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
       </div>
 
-      <div class="attributeForm">
-        <label for="transaccion">Transacción:</label><br>
-        <input type="text" id="transaccion" name="transaccion"><br>
+      <div class="form-group">
+        <label for="transaccion">Transacción:</label>
+        <input type="text" id="transaccion" name="transaccion">
       </div>
 
-      <div class="attributeForm">
-        <label for="fecha">Fecha:</label><br>
-        <input type="date" id="fecha" name="fecha"><br>
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha">
       </div>
 
-      <div class="attributeForm">
-        <label for="status">Status:</label><br>
-        <select id="status" name="status">
-      </select><br><br>
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" name="status"></select>
       </div>
 
-  </form>
-  </section>
-  <div class="navigation">
-    <button class="submit" type="submit" [disabled]="!form.valid">Search</button>
-    <button class="save" type="button" (click)="onSave()">Save Search</button>
-  </div>
+      <div class="navigation">
+        <button class="btn submit" type="submit" [disabled]="!form.valid">Search</button>
+        <button class="btn save" type="button" (click)="onSave()">Save Search</button>
+      </div>
+    </form>
+  </main>
 </div>
