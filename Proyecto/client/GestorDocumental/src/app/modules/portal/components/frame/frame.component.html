@@ -1,36 +1,15 @@
 <div class="master">
-    <div class="sidebar">
-        <img src="../../../../../assets/images/EvolucionaLogo.jpeg" alt="Logo empresa">
 
-        <div class="spacer"></div>
+  <app-navbar class="navbar"></app-navbar>
 
-        <h4>MENÚ</h4>
+  <div class="content">
 
-        <div class="box">
-            Search
-        </div>
-        <div class="spacer"></div>
-        <div class="box">
-            Add
-        </div>
-        <div class="spacer"></div>
-        <div class="box">
-            Forms
-        </div>
+    <app-header class="header"></app-header>
+
+    <div class="main-content">
+        <router-outlet></router-outlet>
     </div>
-    <div class="content">
-        <div class="header">
-            <span>
-                Buscar  >  Resultados
-            </span>
-            <div>
-
-            </div>
-        </div>
-        <div class="main-content">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+  </div>
 </div>
 
 
