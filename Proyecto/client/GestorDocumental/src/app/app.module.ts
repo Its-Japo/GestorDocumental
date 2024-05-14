@@ -9,11 +9,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { HomePortalComponent } from './components/home-portal/home-portal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomePortalComponent
   ],
   imports: [
     BrowserModule,
