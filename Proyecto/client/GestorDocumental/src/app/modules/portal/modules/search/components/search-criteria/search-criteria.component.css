@@ -42,23 +42,41 @@ input, select {
   margin: 5px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.btn.submit {
+  background-color: #000;
+  color: #fff;
 }
 
 .btn.save {
-  background-color: #28a745;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
 }
 
-.btn:hover {
-  background-color: #0056b3;
+.btn.cancel {
+  background-color: #f8f8f8;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.btn.submit:hover {
+  background-color: #333;
 }
 
 .btn.save:hover {
-  background-color: #218838;
+  background-color: #f0f0f0;
+  border: 1px solid #333;
+}
+
+.btn.cancel:hover {
+  background-color: #e0e0e0;
+  border: 1px solid #bbb;
 }
 
 @media (max-width: 600px) {
