@@ -1,13 +1,16 @@
 // region:    --- Modules
 
 mod error;
+mod store;
 
 pub use self::error::{Error, Result};
 
 // endregion: --- Modules
 
 #[derive(Clone)]
-pub struct ModelManager {}
+pub struct ModelManager {
+	//db: Db,
+}
 
 impl ModelManager {
 	pub async fn new() -> Result<Self> {
