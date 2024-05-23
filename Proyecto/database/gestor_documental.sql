@@ -72,6 +72,29 @@ CREATE TABLE
         FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
     );
 
+CREATE TABLE 
+    COMENTARIO (
+        comentId SERIAL PRIMARY KEY,
+        expedienteId INT NOT NULL,
+        fecha DATE,
+        hora TIME,
+        texto VARCHAR(250),
+        userId INT NOT NULL,
+        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
+    );
+
+CREATE TABLE
+    EVENTOS (
+        eventoId SERIAL PRIMARY KEY,
+        expedienteId INT NOT NULL,
+        fecha DATE,
+        hora TIME,
+        userId INT NOT NULL,
+        descripcion VARCHAR(100),
+        tipo VARCHAR(50),
+        FOREIGN KEY (expedienteId) REFERENCES EXPEDIENTE(expedienteId) ON DELETE CASCADE
+    );
+
 CREATE TABLE
     USUARIO (
         userId SERIAL PRIMARY KEY,
