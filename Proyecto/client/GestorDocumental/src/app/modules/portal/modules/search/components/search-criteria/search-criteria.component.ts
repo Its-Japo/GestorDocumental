@@ -1,34 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { FormService } from '../../services/form.service';
+import { FormConfigService } from '../../services/form-config.service';
 
 @Component({
   selector: 'app-search-criteria',
   templateUrl: './search-criteria.component.html',
-  styleUrl: './search-criteria.component.css'
+  styleUrls: ['./search-criteria.component.css']
 })
 export class SearchCriteriaComponent {
   form = new FormGroup({});
   model = {};
-  fields: FormlyFieldConfig[];
+  fields: FormlyFieldConfig[] = [];
+  selectedProject: number = 0;  // Propiedad para mantener el proyecto seleccionado
 
-  constructor(
-    private formService: FormService
-  ) {
-    this.fields = formService.getFormConfig();
+  constructor(private formService: FormConfigService) { }
+
+
+  loadFormConfig(projectId: string) {
+    this.formService.getFormConfig(projectId).subscribe(
+      config => {
+        this.fields = config;
+      },
+      error => {
+        console.error('Error al cargar la configuración del formulario', error);
+      }
+    );
   }
 
-  ngOnInit(): void {
+  onProjectChange(newValue: number) {
+    console.log("Project changed to:", newValue);
+    this.loadFormConfig(newValue.toString()); // Recargar configuración de Formly según el proyecto
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      console.log(this.model);
-    }
+    console.log("Selected Project ID:", this.selectedProject);
+    console.log(this.model); // También enviar otros datos del formulario si es necesario
+    // Aquí implementa la lógica para enviar datos al servidor
   }
 
   onSave() {
-    // lógica para guardar la búsqueda
+    console.log('Saving search...');
+    // Implementa la lógica para guardar la búsqueda aquí
   }
 }

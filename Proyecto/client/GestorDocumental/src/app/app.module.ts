@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './components/login/login.component';
 import { FormlyModule } from '@ngx-formly/core';
@@ -19,9 +20,16 @@ import { HomePortalComponent } from './components/home-portal/home-portal.compon
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormlyModule.forRoot(),
+    HttpClientModule,
+    FormlyModule.forRoot({
+      types: [
+        { name: 'text', extends: 'input' }, // Extiende el tipo input por defecto para text
+        { name: 'date', extends: 'input' }  // Configura también el tipo date
+      ]
+    }),
     FormlyBootstrapModule,
   ],
   providers: [],

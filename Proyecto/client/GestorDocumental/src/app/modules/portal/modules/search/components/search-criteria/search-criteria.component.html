@@ -4,36 +4,18 @@
   </header>
   <main>
     <div class="project-select">
-      <label for="project">Project</label>
-      <select id="project" formControlName="project"></select>
+      <label for="project">Proyecto</label>
+      <select id="project" [(ngModel)]="selectedProject" (ngModelChange)="onProjectChange($event)" name="project">
+        <option value="1">Proyecto 1</option>
+        <option value="2">Proyecto 2</option>
+        <option value="3">Proyecto 3</option>
+      </select>
     </div>
-
-    <form class="form-class" method="post">
-      <div class="form-group">
-        <label for="idLiquidacion">Id Liquidación:</label>
-        <input type="text" id="idLiquidacion" name="idLiquidacion">
-      </div>
-
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre">
-      </div>
-
-      <div class="form-group">
-        <label for="transaccion">Transacción:</label>
-        <input type="text" id="transaccion" name="transaccion">
-      </div>
-
-      <div class="form-group">
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha">
-      </div>
-
-      <div class="form-group">
-        <label for="status">Status:</label>
-        <select id="status" name="status"></select>
-      </div>
-
+    <!-- Formulario controlado por Formly -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-class">
+      <!-- Campos dinámicos generados por Formly -->
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+      <!-- Botones de Acción -->
       <div class="navigation">
         <button class="btn submit" type="submit" [disabled]="!form.valid">Search</button>
         <button class="btn save" type="button" (click)="onSave()">Save Search</button>

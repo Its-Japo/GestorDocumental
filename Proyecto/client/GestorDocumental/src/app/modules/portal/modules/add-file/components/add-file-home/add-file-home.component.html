@@ -1,52 +1,59 @@
-<div class="container">
-  <header>
+<div class="master">
+  <div class="head">
     <h1>File Entry</h1>
-  </header>
-  <main>
-    <div class="project-select">
-      <label for="project">Project</label>
-      <select id="project" formControlName="project"></select>
+  </div>
+  <section>
+    <div class="proyect-select">
+      <label for="proyect">Proyect</label>
+      <select id="proyect" formControlName="proyect">
+
+      </select>
     </div>
+
 
     <div class="boxform">
       <form class="form-class" method="post">
-        <div class="form-group">
-          <label for="idLiquidacion">Id Liquidación:</label>
-          <input type="text" id="idLiquidacion" name="idLiquidacion">
+        <div class="attributeForm">
+          <label for="idLiquidacion">Id Liquidación:</label><br>
+          <input type="text" id="idLiquidacion" name="idLiquidacion"><br>
         </div>
 
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre">
+        <div class="attributeForm">
+          <label for="nombre">Nombre:</label><br>
+          <input type="text" id="nombre" name="nombre"><br>
         </div>
 
-        <div class="form-group">
-          <label for="transaccion">Transacción:</label>
-          <input type="text" id="transaccion" name="transaccion">
+        <div class="attributeForm">
+          <label for="transaccion">Transacción:</label><br>
+          <input type="text" id="transaccion" name="transaccion"><br>
         </div>
 
-        <div class="form-group">
-          <label for="fecha">Fecha:</label>
-          <input type="date" id="fecha" name="fecha">
+        <div class="attributeForm">
+          <label for="fecha">Fecha:</label><br>
+          <input type="date" id="fecha" name="fecha"><br>
         </div>
 
-        <div class="form-group">
-          <label for="status">Status:</label>
-          <select id="status" name="status"></select>
+        <div class="attributeForm">
+          <label for="status">Status:</label><br>
+          <select id="status" name="status">
+        </select><br><br>
         </div>
       </form>
 
       <div class="uploadfile">
         <div class="containerfile">
-          <label for="file">Document Status</label>
-          <input type="file" id="file" name="file">
+          <label for="file">Document Status</label><br>
+          <input type="file" id="file" name="file"><br>
         </div>
+
       </div>
     </div>
-  </main>
+
+
+  </section>
   <div class="navigation">
-    <button class="btn save" type="submit">Save</button>
-    <button class="btn save-add" type="button">Save and Add Another</button>
-    <button class="btn clear" type="button">Clear</button>
+    <button class="submit" type="submit">Save</button>
+    <button class="save" type="button" >Save Search</button>
+    <button class="cancel" type="button" >Cancel</button>
   </div>
 </div>
