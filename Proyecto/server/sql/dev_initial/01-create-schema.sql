@@ -76,8 +76,13 @@ CREATE TABLE
     USUARIO (
         userId SERIAL PRIMARY KEY,
         username VARCHAR(50) UNIQUE NOT NULL,
-        passwordHash VARCHAR(50) UNIQUE NOT NULL,
         correo VARCHAR(50) UNIQUE NOT NULL
+        
+        -- Auth
+        pwd VARCHAR(256) UNIQUE NOT NULL,
+        pwd_salt uuid NOT NULL DEFAULT gen_random_uuid(),
+        token_salt uuid NOT NULL DEFAULT gen_random_uuid(),
+
     );
 
 CREATE TABLE
